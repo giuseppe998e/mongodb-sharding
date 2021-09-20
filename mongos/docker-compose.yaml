@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+    mongos:
+        container_name: mongos
+        image: mongo
+        command: mongos --configdb cfgrs/cfgsvr1:27017,cfgsvr2:27017,cfgsvr3:27017 --bind_ip 0.0.0.0 --port 27017
+        networks:
+            - mongodb-net
+        ports:
+            - "27017:27017"
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+
+networks:
+    mongodb-net:
+        external: true
