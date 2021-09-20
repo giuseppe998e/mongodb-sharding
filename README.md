@@ -98,18 +98,7 @@ $ docker exec -it shard2svr1 mongo
 
 > rs.status()
 ```
-
-### Add shard to the cluster
-Connect to mongos
-```
-$ docker exec -it mongos mongo
-```
-Add shard
-```js
-> sh.addShard("shard2rs/shard2svr1,shard2svr2,shard2svr3")
-
-> sh.status()
-```
+Repeat "*[Adding another shard](#add-shard-to-the-cluster)* " replacing `shard1` with `shard2` for each occurrence.
 
 # Notices
 ## License
