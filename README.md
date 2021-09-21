@@ -74,8 +74,7 @@ Add shard
 > sh.status()
 ```
 
-## Adding another shard
-### Shard 2 servers
+## Add another shard
 Start shard 2 servers (3 member replicas set)
 ```
 $ docker-compose -f shard2/docker-compose.yaml up -d
