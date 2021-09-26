@@ -1,4 +1,12 @@
 # Set up MongoDB Sharding using Docker containers
+## Automatic set up
+```
+$ chmod +x build.sh
+$ ./build.sh [--force-root]
+```
+
+---
+
 ## Docker local network
 Create a new docker network
 ```
