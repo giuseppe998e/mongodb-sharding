@@ -42,7 +42,7 @@ check_reqs() {
 }
 
 dcompose() {
-    echo "> Creating '$1' container(s)"
+    echo "> Creating '$1' container(s)..."
     (docker-compose -f "$1/docker-compose.yaml" up -d 1> /dev/null) && echo ">> Ok!" || abort ">> Failed!"
 }
 
@@ -52,7 +52,7 @@ mongocmd() {
 }
 
 create_mongonet() {
-    echo "> Creating docker network"
+    echo "> Creating docker network..."
     (docker network create "mongodb-net" 1> /dev/null) && echo ">> Ok!" || abort ">> Failed!"
 }
 
