@@ -1,5 +1,11 @@
 name: Shellcheck
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - "**.sh"
+  pull_request:
+    paths:
+      - "**.sh"
 
 jobs:
   build:
