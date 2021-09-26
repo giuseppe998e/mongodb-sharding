@@ -20,39 +20,47 @@
 # SOFTWARE.
 
 abort() {
-    echo $1
+    echo "$1"
     exit 1
 }
 
 check_reqs() {
     # Check if Docker is installed
-    (command -v docker &> /dev/null) \
-        || abort "Docker is NOT installed!"
+    if ! command -v docker > /dev/null 2>&1; then
+        abort "Docker is NOT installed!"
+    fi
 
     # Check if Docker-Compose is installed
-    (command -v docker-compose &> /dev/null) \
-        || abort "Docker-Compose is NOT installed!"
+    if ! command -v docker-compose > /dev/null 2>&1; then
+        abort "Docker-Compose is NOT installed!"
+    fi
 }
 
 dcompose() {
     echo "> Creating '$1' container(s)..."
-    (docker-compose -f "$1/docker-compose.yaml" up -d 1> /dev/null) \
-        && echo ">> Ok!"                                            \
-        || abort ">> Failed!"
+    if docker-compose -f "$1/docker-compose.yaml" up -d 1> /dev/null; then
+        echo ">> Ok!"
+    else
+        abort ">> Failed!"
+    fi
 }
 
 mongocmd() {
     echo "> Executing command on '$1' container..."
-    (docker exec -it $1 bash -c "sleep 5s && echo '$2' | mongosh" 1> /dev/null) \
-        && echo ">> Ok!"                                                        \
-        || abort ">> Failed!"
+    if docker exec -it "$1" bash -c "sleep 5s && echo '$2' | mongosh" 1> /dev/null; then
+        echo ">> Ok!"
+    else
+        abort ">> Failed!"
+    fi
 }
 
 create_mongonet() {
     echo "> Creating docker network..."
-    (docker network create "mongodb-net" 1> /dev/null) \
-        && echo ">> Ok!"                               \
-        || abort ">> Failed!"
+    if docker network create "mongodb-net" 1> /dev/null; then
+        echo ">> Ok!"
+    else
+        abort ">> Failed!"
+    fi
 }
 
 create_cfgs() {
