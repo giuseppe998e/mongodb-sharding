@@ -25,11 +25,6 @@ abort() {
 }
 
 check_reqs() {
-    # Check if user is root
-    if test "$1" != "--force-root" && test $(id -u) == 0; then
-        abort "You should NOT run this script as root! (Use '--force-root' to bypass)"
-    fi
-
     # Check if Docker is installed
     if ! command -v docker &> /dev/null; then
         abort "Docker is NOT installed!"
@@ -80,7 +75,7 @@ create_router() {
 #-----------
 # Main func
 
-check_reqs $1
+check_reqs
 
 create_mongonet
 
