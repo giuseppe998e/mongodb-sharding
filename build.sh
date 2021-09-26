@@ -26,34 +26,32 @@ abort() {
 
 check_reqs() {
     # Check if Docker is installed
-    if ! command -v docker &> /dev/null; then
-        abort "Docker is NOT installed!"
-    fi
+    (command -v docker &> /dev/null) \
+        || abort "Docker is NOT installed!"
 
     # Check if Docker-Compose is installed
-    if ! command -v docker-compose &> /dev/null; then
-        abort "Docker-Compose is NOT installed!"
-    fi
+    (command -v docker-compose &> /dev/null) \
+        || abort "Docker-Compose is NOT installed!"
 }
 
 dcompose() {
     echo "> Creating '$1' container(s)..."
     (docker-compose -f "$1/docker-compose.yaml" up -d 1> /dev/null) \
-        && echo ">> Ok!" \
+        && echo ">> Ok!"                                            \
         || abort ">> Failed!"
 }
 
 mongocmd() {
     echo "> Executing command on '$1' container..."
     (docker exec -it $1 bash -c "sleep 5s && echo '$2' | mongosh" 1> /dev/null) \
-        && echo ">> Ok!" \
+        && echo ">> Ok!"                                                        \
         || abort ">> Failed!"
 }
 
 create_mongonet() {
     echo "> Creating docker network..."
     (docker network create "mongodb-net" 1> /dev/null) \
-        && echo ">> Ok!" \
+        && echo ">> Ok!"                               \
         || abort ">> Failed!"
 }
 
