@@ -2,7 +2,7 @@
 ## Automatic Setup
 ```
 $ chmod +x build.sh
-$ ./build.sh [--force-root]
+$ ./build.sh
 ```
 
 ---
