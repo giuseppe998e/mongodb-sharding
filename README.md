@@ -1,5 +1,5 @@
-# Set up MongoDB Sharding using Docker containers
-## Automatic set up
+# MongoDB Sharding using Docker containers
+## Automatic Setup
 ```
 $ chmod +x build.sh
 $ ./build.sh [--force-root]
@@ -7,14 +7,14 @@ $ ./build.sh [--force-root]
 
 ---
 
-## Docker local network
+## Manual Setup
+### Local network
 Create a new docker network
 ```
 $ docker network create mongodb-net
 ```
 (It allows servers to communicate with each other even in offline mode.)
 
-## Initialize servers
 ### Config servers
 Start config servers (3 member replica set)
 ```
@@ -70,7 +70,7 @@ Start mongos query router
 $ docker-compose -f mongos/docker-compose.yaml up -d
 ```
 
-## Add shard to the cluster
+### Add shard to the cluster
 Connect to mongos
 ```
 $ docker exec -it mongos mongo
@@ -82,7 +82,7 @@ Add shard
 > sh.status()
 ```
 
-## Add another shard
+### Add another shard
 Start shard 2 servers (3 member replicas set)
 ```
 $ docker-compose -f shard2/docker-compose.yaml up -d
