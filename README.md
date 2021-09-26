@@ -13,7 +13,7 @@ Create a new docker network
 ```
 $ docker network create mongodb-net
 ```
-(It allows servers to communicate with each other even in offline mode.)
+(It allows servers to communicate with each other even in offline mode)
 
 ### Config servers
 Start config servers (3 member replica set)
