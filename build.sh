@@ -25,11 +25,6 @@ abort() {
 }
 
 check_reqs() {
-    # Check if Docker is installed
-    if ! command -v docker > /dev/null 2>&1; then
-        abort "Docker is NOT installed!"
-    fi
-
     # Check if Docker-Compose is installed
     if ! command -v docker-compose > /dev/null 2>&1; then
         abort "Docker-Compose is NOT installed!"
